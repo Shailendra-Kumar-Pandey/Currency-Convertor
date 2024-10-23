@@ -1,4 +1,4 @@
-const BASE_URL="https://v6.exchangerate-api.com/v6/fd7d380c390c585079f92c7a/latest";
+const BASE_URL="https://raw.githubusercontent.com/WoXy-Sensei/currency-api/main/api";
 
 const selects = document.querySelectorAll("select");
 const btn = document.querySelector("button");
@@ -43,11 +43,12 @@ btn.addEventListener("click", async (evt)=>{
         ammount.value ="1";
     }
     // console.log( fromCurr.value ,toCurr.value );
-    const URL = `${BASE_URL}/${fromCurr.value}`;
+    const URL = `${BASE_URL}/${toCurr.value}_${fromCurr.value}.json`;
     let response = await fetch(URL);
     let data = await response.json();
-    let rate = data[fromCurr.value];
+    // console.log(data);
+    let rate = data.rate;
+    // console.log(rate)
     let finalAmt = amtVal * rate;
-
     msg.innerText = `${amtVal} ${fromCurr.value} = ${finalAmt} ${toCurr.value}`;
 })
